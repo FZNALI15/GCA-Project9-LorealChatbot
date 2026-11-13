@@ -1,64 +1,278 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat Assistant</title>
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <body>
-    <div class="page-wrapper">
-      <!------- Header / Branding ------->
-      <header class="site-header">
-        <h1 class="site-title">Smart Product Advisor</h1>
-      </header>
+  <title>L'Oréal | Smart Beauty Advisor</title>
 
-      <!------- Chat Area ------->
-      <main>
-        <section class="chatbox">
-          <div id="chatWindow" class="chat-window">
-            <!-- messages will be appended here via JS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <div class="page-wrapper">
+
+    <!-- Header / Branding -->
+    <header class="site-header">
+
+      <img
+        src="img/loreal-logo.png"
+        alt="L'Oréal"
+        class="brand-logo"
+      />
+
+      <p class="brand-tagline">BEAUTY POWERED BY AI</p>
+
+      <h1 class="site-title">Your Personal Beauty Advisor</h1>
+
+      <p class="site-description">
+        Discover products, build your perfect routine, and explore
+        personalized beauty recommendations.
+      </p>
+
+    </header>
+
+    <!-- Main Chat Interface -->
+    <main>
+
+      <section class="chatbox" aria-label="Beauty advisor chatbot">
+
+        <!-- Chat Header -->
+        <div class="chat-header">
+
+          <div class="advisor-info">
+
+            <div class="advisor-avatar">
+              <span class="material-icons">auto_awesome</span>
+            </div>
+
+            <div>
+              <h2>L'Oréal Beauty Advisor</h2>
+              <p class="advisor-status">
+                <span class="status-dot"></span>
+                AI Assistant
+              </p>
+            </div>
+
           </div>
 
+          <button id="newChatBtn" class="new-chat-btn" type="button">
+            <span class="material-icons">add</span>
+            New Chat
+          </button>
+
+        </div>
+
+        <!-- Chat Messages -->
+        <div
+          id="chatWindow"
+          class="chat-window"
+          role="log"
+          aria-live="polite"
+          aria-label="Chat conversation"
+        >
+
+          <!-- Welcome Message -->
+          <div class="welcome-message" id="welcomeMessage">
+
+            <div class="welcome-icon">
+              <span class="material-icons">auto_awesome</span>
+            </div>
+
+            <h2>Beauty begins with you.</h2>
+
+            <p>
+              Welcome to your personal L'Oréal Beauty Advisor.
+              Whether you're looking for skincare, makeup, haircare,
+              or fragrances, I'm here to help you find what works
+              best for you.
+            </p>
+
+            <p class="suggestion-label">
+              Not sure where to start? Try asking:
+            </p>
+
+            <!-- Suggested Questions -->
+            <div class="suggestions">
+
+              <button
+                type="button"
+                class="suggestion-btn"
+                data-question="Can you recommend a skincare routine for dry skin?"
+              >
+                <span class="material-icons">water_drop</span>
+                Skincare for dry skin
+              </button>
+
+              <button
+                type="button"
+                class="suggestion-btn"
+                data-question="Which L'Oréal products are good for damaged hair?"
+              >
+                <span class="material-icons">spa</span>
+                Haircare recommendations
+              </button>
+
+              <button
+                type="button"
+                class="suggestion-btn"
+                data-question="Can you help me create a natural everyday makeup look?"
+              >
+                <span class="material-icons">palette</span>
+                Everyday makeup routine
+              </button>
+
+              <button
+                type="button"
+                class="suggestion-btn"
+                data-question="What is the difference between a serum and a moisturizer?"
+              >
+                <span class="material-icons">lightbulb</span>
+                Understanding beauty products
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="loadingIndicator" class="loading-indicator" hidden>
+
+          <div class="typing-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <p>Your beauty advisor is thinking...</p>
+
+        </div>
+
+        <!-- Chat Input -->
+        <div class="chat-input-area">
+
           <form id="chatForm" class="chat-form">
-            <label for="userInput" class="visually-hidden">Message</label>
+
+            <label for="userInput" class="visually-hidden">
+              Your message
+            </label>
+
             <input
               id="userInput"
               name="userInput"
               type="text"
-              placeholder="Ask me about products or routines…"
+              placeholder="Ask me about products or beauty routines..."
               autocomplete="off"
+              maxlength="2000"
               required
             />
-            <button type="submit" id="sendBtn">
+
+            <button type="submit" id="sendBtn" aria-label="Send message">
               <span class="material-icons">send</span>
-              <span class="visually-hidden">Send</span>
             </button>
+
           </form>
-        </section>
-      </main>
 
-      <!------- Footer Links ------->
-      <footer class="site-footer">
-        <p>&copy; 2025 Company Name. All rights reserved.</p>
-        <nav>
-          <!-- These URLs are placeholders -->
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Use</a>
-          <a href="#">Contact</a>
-        </nav>
-      </footer>
-    </div>
+          <p class="chat-disclaimer">
+            AI-generated recommendations may vary.
+            Always check product labels and ingredients.
+          </p>
 
-    <script src="script.js"></script>
-  </body>
+        </div>
+
+      </section>
+
+      <!-- Feature Highlights -->
+      <section class="feature-strip" aria-label="Chatbot features">
+
+        <div class="feature">
+          <span class="material-icons">person_outline</span>
+          Personalized recommendations
+        </div>
+
+        <div class="feature">
+          <span class="material-icons">auto_awesome</span>
+          AI-powered beauty advice
+        </div>
+
+        <div class="feature">
+          <span class="material-icons">shield</span>
+          Secure API connection
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+
+      <img
+        src="img/loreal-logo.png"
+        alt="L'Oréal"
+        class="footer-logo"
+      />
+
+      <p>
+        L'Oréal Smart Beauty Advisor
+      </p>
+
+      <p class="project-credit">
+        Educational project developed through the Global Career Accelerator.
+        Not an official L'Oréal service.
+      </p>
+
+      <nav aria-label="Footer navigation">
+
+        <a
+          href="https://www.loreal.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Explore L'Oréal
+        </a>
+
+        <a
+          href="https://www.lorealparisusa.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Discover Products
+        </a>
+
+      </nav>
+
+      <p class="copyright">
+        &copy; 2026 | Educational Project
+      </p>
+
+    </footer>
+
+  </div>
+
+  <!-- Markdown formatting and HTML sanitization -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
+
+  <!-- Chatbot functionality -->
+  <script type="module" src="script.js"></script>
+
+</body>
 </html>
